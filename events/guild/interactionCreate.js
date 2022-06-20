@@ -2,7 +2,7 @@ const discord = require("discord.js");
 
 module.exports = async (client, discord, interaction)  => {
 
-    //EJECUTAR COMANDOS O CONTEXTMENU
+    //ejecucion de comandos y context menu
     if(interaction.isCommand() || interaction.isContextMenu()){
         const command = client.slash.get(interaction.commandName);
 

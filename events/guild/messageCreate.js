@@ -14,7 +14,7 @@ module.exports = async (client, discord, message) => {
 
   if (command) {
     command.execute(client, message, args, discord);
-  }else{ //SI EL COMANDO NOafd EXISTE...
+  }else{ //SI EL COMANDO NO EXISTE...
     if (!command){
         const embed = new discord.MessageEmbed()
         .setTitle("Comando no encontrado")
