@@ -1,4 +1,4 @@
-const colors = require("colors");
+const colors = require('colors');
 
 module.exports = async (client) => {
 
@@ -7,4 +7,5 @@ module.exports = async (client) => {
     client.user.setStatus("online");
 
     console.log(colors.bgGreen(`- BOT ${client.user.username} (${client.user.id}) ESTÁ EN LINEA\n`));
+
 }
