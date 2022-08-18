@@ -10,11 +10,12 @@ module.exports = async (client, discord, interaction)  => {
         //#region CrearTicket
         if(interaction.customId === "ticket-crear"){
 
+            const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone");
+
             if(interaction.guild.channels.cache.find(c => c.name === `ticketabierto-${interaction.user.username}`)){
                 
                 interaction.reply({ content: `<@${interaction.user.id}>, ya hay un ticket abierto a tu nombre y solo se puede tener uno activo por usuario. \nSi deseás crear uno nuevo, por favor marcá como cerrado tu ticket actualmente abierto.`, ephemeral: true });
             }else{
-                const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone");
 
                 interaction.guild.channels.create(`ticketabierto-${interaction.user.username}`, {
     
@@ -76,13 +77,25 @@ module.exports = async (client, discord, interaction)  => {
                     .setColor("BLURPLE")
                     .setTimestamp();
 
+                    
                 interaction.reply({embeds: [embed], ephemeral: false });
+
+                //El creador del ticket ya no visualizará el ticket
+                const everyone = interaction.guild.roles.cache.find(r => r.name === "@everyone");
+
+                channel.permissionOverwrites.set([
+                    {
+                        id: everyone.id,
+                        deny: ["VIEW_CHANNEL", "SEND_MESSAGES"]
+                    }
+                ])
+
 
                 //Log
                 const msg = new discord.MessageEmbed()
                     .setTitle(`¡Ticket cerrado!`)
                     .setColor("RED")
-                    .setDescription(`**CERRADO POR:** ${interaction.user.tag}`)
+                    .setDescription(`**CHANNEL NAME**: ${interaction.channel.name}\n**CHANNEL ID**: ${interaction.channel.id}\n\n**CERRADO POR:** ${interaction.user.tag}`)
                     .setTimestamp();
     
                 logChannel.send({ embeds: [msg] });

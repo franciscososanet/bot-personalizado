@@ -9,7 +9,7 @@ module.exports = async (client, discord, guild) => {
     const msg = new discord.MessageEmbed()
         .setTitle(`¡${client.user.username} se unió a un nuevo servidor!`)
         .setColor("GREEN")
-        .setDescription(`**SERVER NAME:** ${guild.name} \n**SERVER ID:** ${guild.id} \n\n**DUEÑO USER:** ${serverOwner.user.tag}\n**DUEÑO ID:** ${serverOwner.user.id}`)
+        .setDescription(`**SERVER NAME:** ${guild.name} \n**SERVER ID:** ${guild.id} \n\n**DUEÑO TAG:** ${serverOwner.user.tag}\n**DUEÑO ID:** ${serverOwner.user.id}`)
         .setTimestamp();
 
     logChannel.send({ embeds: [msg] });
