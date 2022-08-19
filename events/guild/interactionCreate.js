@@ -8,13 +8,20 @@ module.exports = async (client, discord, interaction)  => {
 
         //#region AUTOROLES
 
-        if(interaction.customId === "rol-programacion"){
-            const rolProgramador = "1009882061101867119";
+        const rolSinRoles = "1009943784676655105";
+        const rolProgramador = "1009882061101867119";
+        const rolGaming = "1009909682271424612";
 
+        if(interaction.customId === "rol-programacion"){
+            
             if(interaction.member.roles.cache.has(rolProgramador)){
                 interaction.member.roles.remove(rolProgramador);
                 interaction.reply({ content: `<@${interaction.user.id}>, se te removió el rol <@&${rolProgramador}>`, ephemeral: true });
 
+                if(!interaction.member.roles.cache.has(rolGaming)){
+                    interaction.member.roles.add(rolSinRoles);
+                }
+                
                 const msg = new discord.MessageEmbed()
                     .setTitle(`¡Rol removido a ${interaction.user.username}!`)
                     .setColor("RED")
@@ -27,6 +34,10 @@ module.exports = async (client, discord, interaction)  => {
                 interaction.member.roles.add(rolProgramador);
                 interaction.reply({ content: `<@${interaction.user.id}>, se te añadió el rol <@&${rolProgramador}>`, ephemeral: true });
 
+                if(interaction.member.roles.cache.has(rolSinRoles)){
+                    interaction.member.roles.remove(rolSinRoles)
+                }
+
                 const msg = new discord.MessageEmbed()
                 .setTitle(`¡Rol añadido a ${interaction.user.username}!`)
                 .setColor("GREEN")
@@ -38,11 +49,14 @@ module.exports = async (client, discord, interaction)  => {
         }
 
         if(interaction.customId === "rol-gaming"){
-            const rolGaming = "1009909682271424612";
 
             if(interaction.member.roles.cache.has(rolGaming)){
                 interaction.member.roles.remove(rolGaming);
                 interaction.reply({ content: `<@${interaction.user.id}>, se te removió el rol <@&${rolGaming}>`, ephemeral: true });
+
+                if(!interaction.member.roles.cache.has(rolProgramador)){
+                    interaction.member.roles.add(rolSinRoles);
+                }
 
                 const msg = new discord.MessageEmbed()
                     .setTitle(`¡Rol removido a ${interaction.user.username}!`)
@@ -55,6 +69,10 @@ module.exports = async (client, discord, interaction)  => {
             }else{
                 interaction.member.roles.add(rolGaming);
                 interaction.reply({ content: `<@${interaction.user.id}>, se te añadió el rol <@&${rolGaming}>`, ephemeral: true });
+
+                if(interaction.member.roles.cache.has(rolSinRoles)){
+                    interaction.member.roles.remove(rolSinRoles)
+                }
 
                 const msg = new discord.MessageEmbed()
                     .setTitle(`¡Rol añadido a ${interaction.user.username}!`)
@@ -174,18 +192,17 @@ module.exports = async (client, discord, interaction)  => {
     }
     
     
-    //ejecucion de comandos y context menu
     if(interaction.isCommand() || interaction.isContextMenu()){
+
         const command = client.slash.get(interaction.commandName);
 
         if(!command) return;
         
         try{
             await command.run(client, interaction);
-        }catch(e){
-            console.error("ERROR AL EJECUTAR EL COMANDO: " + interaction.commandName + " --- " + e);
+        }catch(error){
+            console.error("ERROR AL EJECUTAR EL COMANDO: " + interaction.commandName + " --- " + error);
         }
     }
-    //#endregion
     
 };
