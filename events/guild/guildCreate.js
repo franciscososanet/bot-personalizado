@@ -4,7 +4,7 @@ module.exports = async (client, discord, guild) => {
 
     serverOwner.send(`¡${serverOwner.user.username}, gracias por invitarme a **${guild.name}**!.\n\nDebo informarte que **estoy exclusivamente programado para https://discord.franciscososa.net**, por lo que muy probable que no funcione correctamente en tu servidor.\n\nSi precisás **tu propio bot**, podés contactar con mi creador vía Discord (*panch1#3894*) o por los otros medios disponibles en **https://franciscososa.net/#contacto**`);
 
-    const logChannel = client.channels.cache.get("1007338362438438922");
+    const logChannel = client.channels.cache.get("1009958301057945760");
 
     const msg = new discord.MessageEmbed()
         .setTitle(`¡${client.user.username} se unió a un nuevo servidor!`)

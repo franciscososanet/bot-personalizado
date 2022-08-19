@@ -2,10 +2,74 @@ const discord = require("discord.js");
 
 module.exports = async (client, discord, interaction)  => {
 
-    const logChannel = client.channels.cache.get("1007390629648683018");
-
-    //#region TICKETS
+    const logChannel = client.channels.cache.get("1009958301057945760");
+    
     if(interaction.isButton()){
+
+        //#region AUTOROLES
+
+        if(interaction.customId === "rol-programacion"){
+            const rolProgramador = "1009882061101867119";
+
+            if(interaction.member.roles.cache.has(rolProgramador)){
+                interaction.member.roles.remove(rolProgramador);
+                interaction.reply({ content: `<@${interaction.user.id}>, se te removió el rol <@&${rolProgramador}>`, ephemeral: true });
+
+                const msg = new discord.MessageEmbed()
+                    .setTitle(`¡Rol removido a ${interaction.user.username}!`)
+                    .setColor("RED")
+                    .setDescription(`**ROL NAME:** <@&${rolProgramador}>\n**USER TAG:** ${interaction.user.tag}`)
+                    .setTimestamp();
+        
+            logChannel.send({ embeds: [msg] });
+
+            }else{
+                interaction.member.roles.add(rolProgramador);
+                interaction.reply({ content: `<@${interaction.user.id}>, se te añadió el rol <@&${rolProgramador}>`, ephemeral: true });
+
+                const msg = new discord.MessageEmbed()
+                .setTitle(`¡Rol añadido a ${interaction.user.username}!`)
+                .setColor("GREEN")
+                .setDescription(`**ROL NAME:** <@&${rolProgramador}>\n**USER TAG:** ${interaction.user.tag}`)
+                .setTimestamp();
+        
+            logChannel.send({ embeds: [msg] });
+            }
+        }
+
+        if(interaction.customId === "rol-gaming"){
+            const rolGaming = "1009909682271424612";
+
+            if(interaction.member.roles.cache.has(rolGaming)){
+                interaction.member.roles.remove(rolGaming);
+                interaction.reply({ content: `<@${interaction.user.id}>, se te removió el rol <@&${rolGaming}>`, ephemeral: true });
+
+                const msg = new discord.MessageEmbed()
+                    .setTitle(`¡Rol removido a ${interaction.user.username}!`)
+                    .setColor("RED")
+                    .setDescription(`**ROL NAME:** <@&${rolGaming}>\n**USER TAG:** ${interaction.user.tag}`)
+                    .setTimestamp();
+        
+                logChannel.send({ embeds: [msg] });
+
+            }else{
+                interaction.member.roles.add(rolGaming);
+                interaction.reply({ content: `<@${interaction.user.id}>, se te añadió el rol <@&${rolGaming}>`, ephemeral: true });
+
+                const msg = new discord.MessageEmbed()
+                    .setTitle(`¡Rol añadido a ${interaction.user.username}!`)
+                    .setColor("GREEN")
+                    .setDescription(`**ROL NAME:** <@&${rolGaming}>\n**USER TAG:** ${interaction.user.tag}`)
+                    .setTimestamp();
+        
+                logChannel.send({ embeds: [msg] });
+            }
+        }
+
+        //#endregion AUTOROLES
+        
+
+        //#region TICKETS
 
         //#region CrearTicket
         if(interaction.customId === "ticket-crear"){
@@ -62,16 +126,16 @@ module.exports = async (client, discord, interaction)  => {
                 logChannel.send({ embeds: [msg] });
             }      
         } 
-        //#endregion
+        //#endregion CrearTicket
 
         //#region CerrarTicket
+
         if(interaction.customId === "ticket-cerrar"){
 
             channel = interaction.guild.channels.cache.find(c => c.name === `ticketabierto-${interaction.user.username}`);
 
             if(channel){
-                channel.setName(`ticketcerrado-${interaction.user.username}`);
-
+                
                 const embed = new discord.MessageEmbed()
                     .setTitle(`¡Ticket cerrado por ${interaction.user.tag}!`)
                     .setColor("BLURPLE")
@@ -90,6 +154,8 @@ module.exports = async (client, discord, interaction)  => {
                     }
                 ])
 
+                channel.setName(`ticketcerrado-${interaction.user.username}`);
+
 
                 //Log
                 const msg = new discord.MessageEmbed()
@@ -103,9 +169,9 @@ module.exports = async (client, discord, interaction)  => {
             }
         }
 
-        //#endregion
+        //#endregion CerrarTicket
+        //#endregion TICKETS
     }
-    //#endregion
     
     
     //ejecucion de comandos y context menu
