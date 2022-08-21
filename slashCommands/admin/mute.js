@@ -1,4 +1,3 @@
-const { MessageEmbed } = require("discord.js");
 const discord = require("discord.js");
 const ms = require("ms");
 
@@ -26,31 +25,33 @@ module.exports = {
             required: "true",
         },
     ],
-        
-                
+                        
     run: async (client, interaction) => {
+
+        const logChannel = client.channels.cache.get("1009958301057945760");
 
         const user = interaction.options.getUser("usuario");
         const tiempo = interaction.options.getString("tiempo");
         const razon = interaction.options.getString("razon");
 
-        if(!interaction.member.permissions.has("MODERATE_MEMBERS")) return interaction.reply("No tienes los permisos requeridos para utilizar este comando");
+        if(!interaction.member.permissions.has("MODERATE_MEMBERS")) return interaction.reply(`<@${interaction.user.id}>, no contás con los permisos requeridos para ejecutar este comando.`);
 
         const member = await interaction.guild.members.fetch(user.id);
 
-        if(member.isCommunicationDisabled()) return interaction.reply("El usuario ya está muteado.");
+        if(member.isCommunicationDisabled()) return interaction.reply({content: `El usuario ${interaction.user.username} ya se encuentra muteado.\nSi lo querés silenciar por más tiempo, primero desmutealo (**/unmute**).`, ephemeral: true});
 
         const time = ms(tiempo);
 
         await member.timeout(time, razon);
 
-        const embed = new discord.MessageEmbed()
-            .setTitle(`${user.tag} ha sido muteado.`)
-            .setDescription(`**Tiempo:** ${tiempo}\n**Razón:** ${razon}`)
+        const msg = new discord.MessageEmbed()
+            .setTitle(`¡${user.tag} ha sido muteado!`)
+            .setDescription(`**Tiempo:** ${tiempo}\n**Razón:** ${razon}\n**Muteado por**: ${interaction.user.tag}`)
             .setColor("RED")
-            .setFooter(interaction.user.tag, interaction.user.displayAvatarURL({ dynamic: true }))
             .setTimestamp();
 
-        interaction.reply({ embeds: [embed] });
+        interaction.reply({ embeds: [msg] });
+
+        logChannel.send({ embeds: [msg] });
     }
 };
