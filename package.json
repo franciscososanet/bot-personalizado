@@ -12,7 +12,9 @@
     "colors": "^1.4.0",
     "discord.js": "^13.8.0",
     "dotenv": "^16.0.1",
+    "megadb": "^3.4.0",
     "mongoose": "^6.4.0",
-    "npm": "^8.13.2"
+    "npm": "^8.13.2",
+    "yt-channel-info": "^2.2.0"
   }
 }

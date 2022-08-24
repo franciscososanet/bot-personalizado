@@ -6,4 +6,5 @@ const twitch = new mongoose.Schema({
 });
 
 const model = mongoose.model("twitchSchema", twitch)
+
 module.exports = model;

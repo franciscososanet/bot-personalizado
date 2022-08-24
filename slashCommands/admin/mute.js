@@ -1,5 +1,4 @@
 const discord = require("discord.js");
-const ms = require("ms");
 
 module.exports = {
 
@@ -55,4 +54,4 @@ module.exports = {
 
         logChannel.send({ embeds: [msg] });
     }
-};
+}
