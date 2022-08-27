@@ -30,5 +30,4 @@ module.exports = (client, discord) => {
     await client.application.commands.set(slash);
   });
 
-  console.log("");
-};
+}

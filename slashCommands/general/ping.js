@@ -1,7 +1,7 @@
 module.exports = {
     
     name: "ping",
-    description: "Muestra el ping del bot",
+    description: "Mostrar el ping del bot",
 
     run: async(client, interaction) => {
 

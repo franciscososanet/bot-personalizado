@@ -17,5 +17,5 @@ module.exports = (client, discord) => {
       }
     }
   });
-  console.log("");
-};
+
+}
