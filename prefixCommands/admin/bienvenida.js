@@ -38,7 +38,7 @@ module.exports = {
                         .setLabel("GitHub")
                 )
 
-            message.channel.send({content: `**¡BIENVENIDO a FRANCISCOSOSA.net!**\n\n**->** Este servidor está destinado a pasarla bien entre amigos vía videojuegos y programación.\n\n**->** Para visualizar los canales, escogé tus <#${rolesChannel.id}>.\n\n**->** La moderación está a cargo de este mismo bot. Si querés saber más de mis funciones podér revisar mi <#${documentacionChannel.id}>.\n\n**->** Podés invitar a tus amigos a este servidor desde el siguiente link: https://discord.franciscososa.net .\n\n**->** Si presentás algún inconveniente o duda, podés crear un ticket de <#${soporteChannel.id}>.\n\n**->** En caso de querer saber más de mi y de los servicios que ofrezco, podés visitar mi web y seguirme en las siguientes redes sociales:`, components: [redes]})
+            message.channel.send({content: `**¡BIENVENIDO a FRANCISCOSOSA.net!**\n\n**->** Este servidor está destinado a pasarla bien entre amigos vía videojuegos y programación.\n\n**->** Para visualizar los canales, escogé tus <#${rolesChannel.id}>.\n\n**->** La moderación está a cargo de este mismo bot.\n\n**->** Podés invitar a tus amigos a este servidor desde el siguiente link: https://discord.franciscososa.net .\n\n**->** Si presentás algún inconveniente o duda, podés crear un ticket de <#${soporteChannel.id}>.\n\n**->** En caso de querer saber más de mi y de los servicios que ofrezco, podés visitar mi web y seguirme en las siguientes redes sociales:`, components: [redes]})
 
         }else{
             
